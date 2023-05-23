@@ -47,7 +47,7 @@ jobs:
 
         # https://help.github.com/en/actions/configuring-and-managing-workflows/caching-dependencies-to-speed-up-workflows
       - name: Cache composer dependencies
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
@@ -107,8 +107,8 @@ jobs:
       # Doctrine Database and tests
       - name: Run Migration
         run: |
-          php bin/console doctrine:database:create
-          php bin/console doctrine:schema:update --force --complete || echo "No migrations found or schema update failed"
+          php bin/console doctrine:database:create --env test
+          php bin/console doctrine:schema:update --force --complete --env test || echo "No migrations found or schema update failed"
           php bin/phpunit --stop-on-failure
         env:
           DATABASE_URL: mysql://root:symfony@127.0.0.1:${{ job.services.mysql.ports['3306'] }}/symfony
