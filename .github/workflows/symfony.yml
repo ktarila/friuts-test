@@ -104,15 +104,11 @@ jobs:
           php bin/console -V
           php bin/console about
 
-      # Doctrine Database
+      # Doctrine Database and tests
       - name: Run Migration
         run: |
           composer require --dev symfony/orm-pack
           php bin/console doctrine:schema:update --force || echo "No migrations found or schema update failed"
+          php bin/phpunit --stop-on-failure
         env:
           DATABASE_URL: mysql://root:symfony@127.0.0.1:${{ job.services.mysql.ports['3306'] }}/symfony
-
-      # Tests
-      - name: Run unit and functional tests
-        run: |
-          php bin/phpunit --stop-on-failure
