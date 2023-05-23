@@ -25,3 +25,10 @@
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
+
+#Remove vim files
+/**/*.swp
+/tags
+/tags.lock
+/tags.temp
+/.php_cs.cache

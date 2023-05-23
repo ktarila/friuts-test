@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * Frutits Test App.
+ * (c) Patrick <ktarila@gmail.com>.
+ */
+
 namespace App\Controller\Api;
 
 use App\Repository\FruitRepository;
@@ -14,6 +19,7 @@ class FruitApiController extends AbstractController
         private FruitRepository $fruitRepository,
     ) {
     }
+
     #[Route('/', name: 'app_fruit')]
     public function index(): Response
     {
