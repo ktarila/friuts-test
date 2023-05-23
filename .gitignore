@@ -32,3 +32,8 @@ yarn-error.log
 /tags.lock
 /tags.temp
 /.php_cs.cache
+
+###> squizlabs/php_codesniffer ###
+/.phpcs-cache
+/phpcs.xml
+###< squizlabs/php_codesniffer ###

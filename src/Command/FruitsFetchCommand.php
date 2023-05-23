@@ -26,8 +26,12 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 )]
 class FruitsFetchCommand extends Command
 {
-    public function __construct(private HttpClientInterface $httpClient, private FruitRepository $fruitRepository, private ValidatorInterface $validator, private MailerInterface $mailer)
-    {
+    public function __construct(
+        private HttpClientInterface $httpClient,
+        private FruitRepository $fruitRepository,
+        private ValidatorInterface $validator,
+        private MailerInterface $mailer
+    ) {
         parent::__construct();
     }
 
@@ -43,15 +47,15 @@ class FruitsFetchCommand extends Command
             $fruitEntity = new Fruit();
             $nutrition = new Nutrition();
             $nutrition->setCalories($fruit['nutritions']['calories'])
-            ->setFat($fruit['nutritions']['fat'])
-            ->setSugar($fruit['nutritions']['sugar'])
-            ->setCarbohydrates($fruit['nutritions']['carbohydrates'])
-            ->setProtein($fruit['nutritions']['protein']);
+                ->setFat($fruit['nutritions']['fat'])
+                ->setSugar($fruit['nutritions']['sugar'])
+                ->setCarbohydrates($fruit['nutritions']['carbohydrates'])
+                ->setProtein($fruit['nutritions']['protein']);
             $fruitEntity->setName($fruit['name'])
-                        ->setFamily($fruit['family'])
-                        ->setFruitOrder($fruit['order'])
-                        ->setGenus($fruit['genus'])
-                        ->setNutritions($nutrition);
+                ->setFamily($fruit['family'])
+                ->setFruitOrder($fruit['order'])
+                ->setGenus($fruit['genus'])
+                ->setNutritions($nutrition);
 
             $errors = $this->validator->validate($fruitEntity);
             if (0 === $errors->count()) {
